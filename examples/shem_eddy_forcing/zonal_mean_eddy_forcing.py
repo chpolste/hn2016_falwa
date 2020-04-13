@@ -15,7 +15,7 @@ for yr in range(2000, 2013):
     # **************** Load data and configure coordinates ****************
 
     # Load the data U, V and T
-    ncfile = Dataset('{}-12-01_to_{}-03-31_uvt.nc'.format(yr, yr + 1), mode='r')
+    ncfile = Dataset('{}-01-01_to_{}-12-31_uvt.nc'.format(yr, yr), mode='r')
 
     time_array = ncfile.variables['time'][:]
     time_units = ncfile.variables['time'].units
@@ -64,7 +64,7 @@ for yr in range(2000, 2013):
                                         # This is to be input to fortran code. The index convention is different.
 
     # === Outputing files ===
-    output_fname = '{}-12-01_to_{}-03-31_output.nc'.format(yr, yr + 1)
+    output_fname = '{}-01-01_to_{}-12-31_output.nc'.format(yr, yr)
     output_file = Dataset(output_fname, 'w')
     output_file.createDimension('levelist',kmax)
     output_file.createDimension('latitude',nlat)
@@ -124,20 +124,20 @@ for yr in range(2000, 2013):
         qgfield_object = QGField(xlon, ylat, plev, uu, vv, tt)
 
         qgpv[tstep, :, :, :], interpolated_u[tstep, :, :, :], interpolated_v[tstep, :, :, :],\
-        interpolated_theta[tstep, :, :, :], static_stability = qgfield_object.interpolate_fields()
+            interpolated_theta[tstep, :, :, :], static_stability = qgfield_object.interpolate_fields()
 
         qref[tstep, :, :], uref[tstep, :, :], ptref[tstep, :, :] = qgfield_object.compute_reference_states(
             northern_hemisphere_results_only=False)
 
         adv_flux_f1[tstep, :, :], \
-        adv_flux_f2[tstep, :, :], \
-        adv_flux_f3[tstep, :, :], \
-        adv_flux_conv[tstep, :, :], \
-        divergence_eddy_momentum_flux[tstep, :, :], \
-        meridional_heat_flux[tstep, :, :], \
-        lwa_baro[tstep, :, :], \
-        u_baro[tstep, :, :], \
-        lwa[tstep, :, :, :] \
+            adv_flux_f2[tstep, :, :], \
+            adv_flux_f3[tstep, :, :], \
+            adv_flux_conv[tstep, :, :], \
+            divergence_eddy_momentum_flux[tstep, :, :], \
+            meridional_heat_flux[tstep, :, :], \
+            lwa_baro[tstep, :, :], \
+            u_baro[tstep, :, :], \
+            lwa[tstep, :, :, :] \
             = qgfield_object.compute_lwa_and_barotropic_fluxes(northern_hemisphere_results_only=False)
 
     output_file.close()
