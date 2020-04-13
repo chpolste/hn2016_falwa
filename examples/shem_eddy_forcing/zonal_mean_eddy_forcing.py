@@ -15,7 +15,7 @@ for yr in range(2000, 2013):
     # **************** Load data and configure coordinates ****************
 
     # Load the data U, V and T
-    ncfile = Dataset('{}-01-01_to_{}-12-31_uvt.nc'.format(yr, yr), mode='r')
+    ncfile = Dataset('/mnt/storage/clare/erai_data/{}-01-01_to_{}-12-31_uvt.nc'.format(yr, yr), mode='r')
 
     time_array = ncfile.variables['time'][:]
     time_units = ncfile.variables['time'].units
@@ -64,7 +64,7 @@ for yr in range(2000, 2013):
                                         # This is to be input to fortran code. The index convention is different.
 
     # === Outputing files ===
-    output_fname = '{}-01-01_to_{}-12-31_output.nc'.format(yr, yr)
+    output_fname = '/mnt/storage/clare/erai_data/{}-01-01_to_{}-12-31_output.nc'.format(yr, yr)
     output_file = Dataset(output_fname, 'w')
     output_file.createDimension('levelist',kmax)
     output_file.createDimension('latitude',nlat)
