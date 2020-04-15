@@ -159,21 +159,21 @@ for tstep in range(ntimes):
     # plt.colorbar()
     # plt.show()
 
-    qref[tstep, :, (nlat//2):], uref[tstep, :, (nlat//2):], ptref[tstep, :, (nlat//2):] = \
-        qgfield_object.compute_reference_states(northern_hemisphere_results_only=True)
+    qref[tstep, :, :], uref[tstep, :, :], ptref[tstep, :, :] = \
+        qgfield_object.compute_reference_states(northern_hemisphere_results_only=False)
 
     print('Finished computing reference state.')
 
-    adv_flux_f1[tstep, (nlat//2):, :], \
-    adv_flux_f2[tstep, (nlat//2):, :], \
-    adv_flux_f3[tstep, (nlat//2):, :], \
-    adv_flux_conv[tstep, (nlat//2):, :], \
-    divergence_eddy_momentum_flux[tstep, (nlat//2):, :], \
-    meridional_heat_flux[tstep, (nlat//2):, :], \
-    lwa_baro[tstep, (nlat//2):, :], \
-    u_baro[tstep, (nlat//2):, :], \
-    lwa[tstep, :, (nlat//2):, :] \
-        = qgfield_object.compute_lwa_and_barotropic_fluxes(northern_hemisphere_results_only=True)
+    adv_flux_f1[tstep, :, :], \
+    adv_flux_f2[tstep, :, :], \
+    adv_flux_f3[tstep, :, :], \
+    adv_flux_conv[tstep, :, :], \
+    divergence_eddy_momentum_flux[tstep, :, :], \
+    meridional_heat_flux[tstep, :, :], \
+    lwa_baro[tstep, :, :], \
+    u_baro[tstep, :, :], \
+    lwa[tstep, :, :, :] \
+        = qgfield_object.compute_lwa_and_barotropic_fluxes(northern_hemisphere_results_only=False)
     
     print(tstep)
     
