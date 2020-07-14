@@ -190,7 +190,7 @@ def test_raise_error_for_unrealistic_kmax():
     """
     Error shall be raised if kmax is out of bound of the pressure grid provided in the input data
 
-    .. versionadded:: 0.4.1
+    .. versionadded:: 0.4.0
     """
     too_large_kmax = 1000
     with pytest.raises(ValueError):
